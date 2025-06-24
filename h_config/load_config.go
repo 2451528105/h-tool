@@ -1,4 +1,4 @@
-package hconfig
+package h_config
 
 import (
 	"fmt"
@@ -15,14 +15,14 @@ func ReadConfigFromFile(fileName string, v any, needListen bool) error {
 	if needListen {
 		vp.WatchConfig()
 		vp.OnConfigChange(func(in fsnotify.Event) {
-			fmt.Println("读取配置文件")
 			if err := loadConfig(vp, fileName, v); err != nil {
-				fmt.Printf("读取配置文件失败：%s\n", err)
+				fmt.Printf("更新配置文件失败：%s\n", err.Error())
 			} else {
-				fmt.Printf("读取配置文件成功!\n")
+				fmt.Printf("更新配置文件成功\n")
 			}
 		})
 	}
+	fmt.Printf("初始化配置文件成功\n")
 	return nil
 }
 
